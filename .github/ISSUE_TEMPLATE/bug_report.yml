@@ -1,0 +1,58 @@
+name: 问题反馈
+description: 记录采集、展示、权限或数据异常
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: dropdown
+    id: source
+    attributes:
+      label: 涉及的数据源
+      options:
+        - 应用与屏幕
+        - 通知
+        - 地点
+        - 步数
+        - 备份或导出
+        - 界面与交互
+        - 其他
+    validations:
+      required: true
+
+  - type: textarea
+    id: behavior
+    attributes:
+      label: 实际情况
+      description: 请描述看到的结果，不要粘贴真实通知、精确坐标、数据库、密码或 Key。
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望情况
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: 应用版本
+      placeholder: 例如 0.5.0
+    validations:
+      required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: 设备与系统
+      placeholder: 例如 Redmi K80 / HyperOS 2 / Android 15
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 隐私确认
+      options:
+        - label: 我已确认附件不包含通知正文、精确坐标、数据库、密码或 Key。
+          required: true

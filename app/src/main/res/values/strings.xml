@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">24π·人生记录</string>
+    <string name="collector_channel">人生记录采集</string>
+    <string name="collector_notification_title">24π 正在记录</string>
+</resources>

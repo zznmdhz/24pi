@@ -1,0 +1,62 @@
+# Android Studio / IntelliJ
+.idea/
+*.iml
+captures/
+
+# Gradle / Kotlin
+.gradle/
+.kotlin/
+**/build/
+
+# Local machine configuration
+local.properties
+.env
+.env.*
+!.env.example
+.DS_Store
+
+# Signing material — never commit release keys or passwords
+*.jks
+*.keystore
+*.p12
+keystore.properties
+
+# Generated packages, exports and diagnostics
+*.apk
+*.aab
+*.apks
+*.log
+*debug*.zip
+outputs/
+work/
+
+# Native build intermediates
+.cxx/
+.externalNativeBuild/
+
+# Personal archives and authentication material
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.csv
+*.tsv
+*.zip
+*.tar
+*.tar.gz
+*.pem
+*.key
+*.pfx
+*.mobileprovision
+*.hprof
+*.trace
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.mp4
+*.mov
+*.7z
+*.bak
+*.kdbx
+*.properties.local

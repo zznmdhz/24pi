@@ -1,0 +1,633 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 6,
+    "identityHash": "df880f43e1ff0220f38a61aaf45c9dc3",
+    "entities": [
+      {
+        "tableName": "app_sessions",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `package_name` TEXT NOT NULL, `app_label` TEXT NOT NULL, `start_ms` INTEGER NOT NULL, `end_ms` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "packageName",
+            "columnName": "package_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "appLabel",
+            "columnName": "app_label",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startMs",
+            "columnName": "start_ms",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "endMs",
+            "columnName": "end_ms",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_app_sessions_start_ms",
+            "unique": false,
+            "columnNames": [
+              "start_ms"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_app_sessions_start_ms` ON `${TABLE_NAME}` (`start_ms`)"
+          },
+          {
+            "name": "index_app_sessions_package_name_start_ms",
+            "unique": false,
+            "columnNames": [
+              "package_name",
+              "start_ms"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_app_sessions_package_name_start_ms` ON `${TABLE_NAME}` (`package_name`, `start_ms`)"
+          }
+        ]
+      },
+      {
+        "tableName": "screen_sessions",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `start_ms` INTEGER NOT NULL, `end_ms` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startMs",
+            "columnName": "start_ms",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "endMs",
+            "columnName": "end_ms",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_screen_sessions_start_ms",
+            "unique": false,
+            "columnNames": [
+              "start_ms"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_screen_sessions_start_ms` ON `${TABLE_NAME}` (`start_ms`)"
+          }
+        ]
+      },
+      {
+        "tableName": "notification_events",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `package_name` TEXT NOT NULL, `app_label` TEXT NOT NULL, `occurred_ms` INTEGER NOT NULL, `action` TEXT NOT NULL, `reason_code` INTEGER, `notification_title` TEXT, `notification_body` TEXT, `notification_key_hash` TEXT, `channel_id` TEXT, `removed_ms` INTEGER, `content_state` TEXT NOT NULL DEFAULT 'LEGACY_UNKNOWN', `capture_origin` TEXT NOT NULL DEFAULT 'LEGACY')",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "packageName",
+            "columnName": "package_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "appLabel",
+            "columnName": "app_label",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "occurredMs",
+            "columnName": "occurred_ms",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "action",
+            "columnName": "action",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "reasonCode",
+            "columnName": "reason_code",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "notificationTitle",
+            "columnName": "notification_title",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "notificationBody",
+            "columnName": "notification_body",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "notificationKeyHash",
+            "columnName": "notification_key_hash",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "channelId",
+            "columnName": "channel_id",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "removedMs",
+            "columnName": "removed_ms",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "contentState",
+            "columnName": "content_state",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'LEGACY_UNKNOWN'"
+          },
+          {
+            "fieldPath": "captureOrigin",
+            "columnName": "capture_origin",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'LEGACY'"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_notification_events_occurred_ms",
+            "unique": false,
+            "columnNames": [
+              "occurred_ms"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_notification_events_occurred_ms` ON `${TABLE_NAME}` (`occurred_ms`)"
+          },
+          {
+            "name": "index_notification_events_package_name_occurred_ms",
+            "unique": false,
+            "columnNames": [
+              "package_name",
+              "occurred_ms"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_notification_events_package_name_occurred_ms` ON `${TABLE_NAME}` (`package_name`, `occurred_ms`)"
+          },
+          {
+            "name": "index_notification_events_notification_key_hash",
+            "unique": false,
+            "columnNames": [
+              "notification_key_hash"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_notification_events_notification_key_hash` ON `${TABLE_NAME}` (`notification_key_hash`)"
+          }
+        ]
+      },
+      {
+        "tableName": "location_points",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `recorded_ms` INTEGER NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `accuracy_m` REAL NOT NULL, `provider` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "recordedMs",
+            "columnName": "recorded_ms",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "latitude",
+            "columnName": "latitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "longitude",
+            "columnName": "longitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "accuracyM",
+            "columnName": "accuracy_m",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "provider",
+            "columnName": "provider",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_location_points_recorded_ms",
+            "unique": false,
+            "columnNames": [
+              "recorded_ms"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_location_points_recorded_ms` ON `${TABLE_NAME}` (`recorded_ms`)"
+          }
+        ]
+      },
+      {
+        "tableName": "places",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `address` TEXT NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `ignored` INTEGER NOT NULL, `is_custom_name` INTEGER NOT NULL, `visit_count` INTEGER NOT NULL DEFAULT 0, `last_visit_ms` INTEGER NOT NULL DEFAULT 0)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "address",
+            "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "latitude",
+            "columnName": "latitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "longitude",
+            "columnName": "longitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ignored",
+            "columnName": "ignored",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isCustomName",
+            "columnName": "is_custom_name",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "visitCount",
+            "columnName": "visit_count",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "lastVisitMs",
+            "columnName": "last_visit_ms",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_places_ignored",
+            "unique": false,
+            "columnNames": [
+              "ignored"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_places_ignored` ON `${TABLE_NAME}` (`ignored`)"
+          }
+        ]
+      },
+      {
+        "tableName": "place_visits",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `place_id` INTEGER NOT NULL, `start_ms` INTEGER NOT NULL, `end_ms` INTEGER NOT NULL, `confidence` REAL NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "placeId",
+            "columnName": "place_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startMs",
+            "columnName": "start_ms",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "endMs",
+            "columnName": "end_ms",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "confidence",
+            "columnName": "confidence",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_place_visits_start_ms",
+            "unique": false,
+            "columnNames": [
+              "start_ms"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_place_visits_start_ms` ON `${TABLE_NAME}` (`start_ms`)"
+          },
+          {
+            "name": "index_place_visits_place_id_start_ms",
+            "unique": true,
+            "columnNames": [
+              "place_id",
+              "start_ms"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_place_visits_place_id_start_ms` ON `${TABLE_NAME}` (`place_id`, `start_ms`)"
+          }
+        ]
+      },
+      {
+        "tableName": "step_samples",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `recorded_ms` INTEGER NOT NULL, `cumulative` INTEGER NOT NULL, `boot_count` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "recordedMs",
+            "columnName": "recorded_ms",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cumulative",
+            "columnName": "cumulative",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bootCount",
+            "columnName": "boot_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_step_samples_recorded_ms",
+            "unique": false,
+            "columnNames": [
+              "recorded_ms"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_step_samples_recorded_ms` ON `${TABLE_NAME}` (`recorded_ms`)"
+          }
+        ]
+      },
+      {
+        "tableName": "sleep_sessions",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `start_ms` INTEGER NOT NULL, `end_ms` INTEGER NOT NULL, `provider` TEXT NOT NULL, `confidence` REAL NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startMs",
+            "columnName": "start_ms",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "endMs",
+            "columnName": "end_ms",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "provider",
+            "columnName": "provider",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "confidence",
+            "columnName": "confidence",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_sleep_sessions_start_ms",
+            "unique": false,
+            "columnNames": [
+              "start_ms"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_sleep_sessions_start_ms` ON `${TABLE_NAME}` (`start_ms`)"
+          }
+        ]
+      },
+      {
+        "tableName": "source_status",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`source` TEXT NOT NULL, `state` TEXT NOT NULL, `last_updated_ms` INTEGER, `detail` TEXT NOT NULL, PRIMARY KEY(`source`))",
+        "fields": [
+          {
+            "fieldPath": "source",
+            "columnName": "source",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastUpdatedMs",
+            "columnName": "last_updated_ms",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "detail",
+            "columnName": "detail",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "source"
+          ]
+        }
+      },
+      {
+        "tableName": "collection_gaps",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `source` TEXT NOT NULL, `start_ms` INTEGER NOT NULL, `end_ms` INTEGER NOT NULL, `reason` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "source",
+            "columnName": "source",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startMs",
+            "columnName": "start_ms",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "endMs",
+            "columnName": "end_ms",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "reason",
+            "columnName": "reason",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_collection_gaps_start_ms",
+            "unique": false,
+            "columnNames": [
+              "start_ms"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_collection_gaps_start_ms` ON `${TABLE_NAME}` (`start_ms`)"
+          },
+          {
+            "name": "index_collection_gaps_source_start_ms_end_ms",
+            "unique": true,
+            "columnNames": [
+              "source",
+              "start_ms",
+              "end_ms"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_collection_gaps_source_start_ms_end_ms` ON `${TABLE_NAME}` (`source`, `start_ms`, `end_ms`)"
+          }
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'df880f43e1ff0220f38a61aaf45c9dc3')"
+    ]
+  }
+}
